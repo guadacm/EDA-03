@@ -2,9 +2,9 @@
 #define ESTRUCTURAS_H_INCLUDED
 
 #define DIM 170
+#define M 220
 
-typedef struct Articulo
-{
+typedef struct Articulo{
 	char codigo[8];
 	char articulo[52];
 	char marca[62];
@@ -15,16 +15,17 @@ typedef struct Articulo
 
 /* VARIABLES */
 // -- R.A.L
-typedef struct Nodo
-{
-    Articulo a;
-    struct Nodo* sig;
-} pNodo;
-
-typedef pNodo* Lista;
-
 
 // -- R.S.
+
+typedef struct Nodo{
+    Articulo a;
+    struct Nodo* sig;
+} nodo;
+
+typedef nodo* pNodo;
+
+pNodo RS[M];        //Definicion del Rebalse Separado, de dimension M cabeceras de lista.
 
 
 /* FIN VARIABLES */
@@ -41,6 +42,15 @@ void limpiar_contadores();
 
 
 /* FIN PROTOTIPOS */
+
+int hashing (char codArt[]){
+    int longitud, i;
+    int contador = 0;
+    longitud = strlen(codArt);
+    for(i=0;i<longitud;i++)
+        contador += (((int)codArt[i]) * (i+1));
+    return (contador % M);
+}
 
 void imprimirArt(Articulo Art)
 {

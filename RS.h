@@ -117,6 +117,48 @@ void menu_RS(int *op)
 
 }
 
+int localizar_LVD (pNodo Lista, char codArt[], pNodo *anterior){
+    pNodo actual = Lista;
+    (*anterior) = Lista;
+    while(actual!=NULL && strcmp(codArt,actual->a.codigo)!=0){
+        (*anterior)=actual;
+        actual=actual->sig;
+    }
+    return (actual!=NULL);
+}
 
+int localizar_RS(char codArt[], pNodo *actual, pNodo *anterior){
+    int h,exito;
+    h=3;/*hashing(codArt);*/
+    exito=localizar_LVD(RS[h],codArt,&(*anterior));
+    (*actual)=(*anterior)->sig;
+    return exito;
+}
+
+int alta_RS(Articulo nuevo){
+    int exito;
+    pNodo actual, anterior, aux;
+    exito=localizar_RS(nuevo.codigo, &actual, &anterior);
+    if(exito) return 0;
+    else{
+        aux = (pNodo)malloc(sizeof(nodo));
+        aux->sig = anterior->sig;
+        anterior->sig = aux;
+        aux->a = nuevo;
+        return 1;
+    }
+}
+
+int baja_RS(char codArt[]){
+
+}
+
+void modificar_RS(char codArt[]){
+
+}
+
+Articulo evocar_RS(char codArt[]){
+
+}
 
 #endif // RS_H_INCLUDED
