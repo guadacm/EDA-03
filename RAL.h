@@ -6,6 +6,10 @@ Articulo temp;
 
 void menu_RAL(int *op)
 {
+    cant_RAL = 0;
+    int i;
+    for(i = 0; i < M; i++)
+            strcpy(RAL[i].codigo, "******");
 
 
     while (*op != 0)

@@ -1,6 +1,11 @@
-
+/*
+RAL:
+"******" celda virgen
+"######" celda libre?
+*/
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Estructuras.h"
 #include "RAL.h"
 #include "RS.h"

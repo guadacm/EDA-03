@@ -31,9 +31,12 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.c">
+		<Unit filename="Estructuras.h" />
+		<Unit filename="P3-Grupo5.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="RAL.h" />
+		<Unit filename="RS.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

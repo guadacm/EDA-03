@@ -2,7 +2,7 @@
 #define ESTRUCTURAS_H_INCLUDED
 
 #define DIM 170
-#define M 220
+#define M 251
 
 typedef struct Articulo{
 	char codigo[8];
@@ -15,6 +15,8 @@ typedef struct Articulo{
 
 /* VARIABLES */
 // -- R.A.L
+Articulo RAL[M];
+int cant_RAL;
 
 // -- R.S.
 
