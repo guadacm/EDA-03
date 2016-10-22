@@ -2,7 +2,7 @@
 #define ESTRUCTURAS_H_INCLUDED
 
 #define DIM 170
-#define M 251
+#define M 251   //Nº primo siguiente a M = 170/0.7 (N = 170, Ro = 0.7)
 
 typedef struct Articulo{
 	char codigo[8];
@@ -15,7 +15,7 @@ typedef struct Articulo{
 
 /* VARIABLES */
 // -- R.A.L
-Articulo RAL[M];
+Articulo RAL[M];    //Definicion del Rebalse Abierto Lineal, de dimensión M.
 int cant_RAL;
 
 // -- R.S.
@@ -70,7 +70,7 @@ void imprimirArt(Articulo Art)
             Art.club);
 }
 
-void limpiar_contadores()
+void limpiar_contadores()   // Inicializa todos los contadores usados en la comparacion de las estrcuturas.
 {
 
 
@@ -104,7 +104,6 @@ void memorizacion_previa(int estr) // estr: 1.RAL || 2.RS
                 case 2:
                     /*alta_RS(nuevo);*/
                     break;
-
             }
         }
         printf("\n\nLa memorizacion se ha llevado a cabo\n\n");
@@ -115,12 +114,18 @@ void memorizacion_previa(int estr) // estr: 1.RAL || 2.RS
 char confirmacion_baja(Articulo baja)
 {
     char c;
-    printf("\n Codigo: \t%s", baja.codigo);
-    printf("\n Articulo: \t%s", baja.articulo);
-    printf("\n Marca: \t%s", baja.marca);
-    printf("\n Valor: \t$%.2f", baja.valor);
-    printf("\n Cantidad: \t%i", baja.cantidad);
-    printf("\n Club: \t\t%s", baja.club);
+    printf("\n Codigo: \t%s"
+           "\n Articulo: \t%s"
+           "\n Marca: \t%s"
+           "\n Valor: \t$%.2f"
+           "\n Cantidad: \t%i"
+           "\n Club: \t\t%s",
+           baja.codigo,
+           baja.articulo,
+           baja.marca,
+           baja.valor,
+           baja.cantidad,
+           baja.club);
     printf("\n\nEsta seguro que quiere eliminar este articulo? S/N: ");
     fflush(stdin);
     scanf("%c", &c);
@@ -178,7 +183,7 @@ void lectura_archivo_operaciones()
                 fscanf(fp, "%i\n", &nuevo.cantidad);
                 fgets(nuevo.club, 72, fp);
             }
-            else
+            else    // -- (3. Consulta)
                 fgets(nuevo.codigo, 8, fp);
 
             strupr(nuevo.codigo);
@@ -206,7 +211,6 @@ void lectura_archivo_operaciones()
     }
     system("pause");
 }
-
 
 
 #endif // ESTRUCTURAS_H_INCLUDED

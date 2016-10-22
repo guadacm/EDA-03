@@ -18,7 +18,6 @@ void encabezado()
     printf("\n\t\t****************************************\n"
              "\t\t*** ESTRUCTURA DE DATOS Y ALGORITMOS ***\n"
              "\t\t****************************************\n");
-
 }
 
 // -- MENU ADMINISTRACION
@@ -39,8 +38,8 @@ void administracion()
         switch (opcion)
         {
             case 0: break;
-            case 1: /*menu_ABB(&opcion);*/ break;
-            case 2: /*menu_LI(&opcion);*/ break;
+            case 1: menu_RAL(&opcion); break;
+            case 2: menu_RS(&opcion); break;
         }
     }
     opcion = -1;
