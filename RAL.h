@@ -125,6 +125,29 @@ void menu_RAL(int *op)
     *op = -1;
 }
 
+int localizar_RAL()
+{
 
+}
+
+int alta_RAL()
+{
+
+}
+
+int baja_RAL()
+{
+
+}
+
+Articulo evocar_RAL()
+{
+
+}
+
+void mostrar_RAL()
+{
+
+}
 
 #endif // RAL_H_INCLUDED
