@@ -9,7 +9,7 @@ void menu_RAL(int *op)
     cant_RAL = 0;
     int i;
     for(i = 0; i < M; i++)      // Inicializo el RAL con la marca de celda virgen
-            strcpy(RAL[i].codigo, "******");
+            strcpy(RAL[i].codigo, "*");
 
 
     while (*op != 0)
@@ -125,19 +125,60 @@ void menu_RAL(int *op)
     *op = -1;
 }
 
-int localizar_RAL()
+int localizar_RAL(char codArt[],int *h, int *pos)
 {
+    if(cant_RAL > 0)
+    {
+        *h = hashing(codArt);
+        int i = *h;
+        while(strcmp(RAL[i].codigo, codArt) != 0 && strcmp(RAL[i].codigo, "*") != 0)
+        {
+            if(strcmp(RAL[i].codigo, "*") != 0 || strcmp(RAL[i].codigo, "#") != 0)
+                *pos = i;
+             i = (i + 1) % M;
+        }
 
+        if(strcmp(RAL[i].codigo, codArt) != 0)
+            return 1;
+        else
+            return 0;
+    }
+    else
+        return 0;
 }
 
-int alta_RAL()
+int alta_RAL(Articulo nuevo)
 {
-
+    int h, pos;
+    if(cant_RAL < M)
+    {
+        if(localizar_RAL(nuevo.codigo, &h, &pos) == 1)
+        {
+            RAL[h] = nuevo;
+            return 1;
+        }
+        else
+            return 0;
+    }
+    else
+        return 0;
 }
 
-int baja_RAL()
+int baja_RAL(char codArt[], int tipo)
 {
-
+    if(cant_RAL > 0)
+    {
+        int h, pos;
+        if(localizar_RAL(codArt, &h, &pos) == 1)
+        {
+            strcpy(RAL[pos].codigo, "#");
+            return 1;
+        }
+        else
+            return 0;
+    }
+    else
+        return 0;
 }
 
 Articulo evocar_RAL()
