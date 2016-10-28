@@ -38,9 +38,9 @@ void encabezado();
 void borrar_salto(Articulo *art);
 void limpiar_contadores();
 
-// -- A.B.B.
+// -- R.A.L.
 
-// -- L.I.
+// -- R.S.
 
 
 /* FIN PROTOTIPOS */

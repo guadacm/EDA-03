@@ -1,7 +1,7 @@
 /*
 RAL:
-"******" celda virgen
-"######" celda libre?
+"*" celda virgen
+"#" celda libre?
 */
 #include <stdio.h>
 #include <stdlib.h>

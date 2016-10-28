@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1477155299 source:c:\users\guada\desktop\pm\p3-grupo5\p3-grupo5.c
+1477589038 source:c:\users\guada\desktop\pm\p3-grupo5\p3-grupo5.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -7,9 +7,9 @@
 	"RAL.h"
 	"RS.h"
 
-1477153914 c:\users\guada\desktop\pm\p3-grupo5\estructuras.h
+1477589082 c:\users\guada\desktop\pm\p3-grupo5\estructuras.h
 
-1477588414 c:\users\guada\desktop\pm\p3-grupo5\ral.h
+1477628795 c:\users\guada\desktop\pm\p3-grupo5\ral.h
 
 1477155494 c:\users\guada\desktop\pm\p3-grupo5\rs.h
 
