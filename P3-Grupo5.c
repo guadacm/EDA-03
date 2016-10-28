@@ -23,7 +23,7 @@ void encabezado()
 // -- MENU ADMINISTRACION
 void administracion()
 {
-    //limpiar_contadores();
+    limpiar_contadores();
 
     while (opcion !=0)
     {
@@ -48,11 +48,12 @@ void administracion()
 // -- MENU COMPARACION
 void comparacion()
 {
+    limpiar_contadores();
 
     encabezado();
     printf("\t\t       Comparacion de estructuras       \n"
            "\t\t       --------------------------       \n");
-    //lectura_archivo_operaciones();
+    lectura_archivo_operaciones();
 
     encabezado();
     printf("\t\t       Comparacion de estructuras       \n"

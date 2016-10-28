@@ -29,6 +29,21 @@ typedef nodo* pNodo;
 
 pNodo RS[M];        //Definicion del Rebalse Separado, de dimension M cabeceras de lista.
 
+int cant_RS = 0;         // cantidad de articulos
+int altas_rs = 0;        // total de altas
+int bajas_rs = 0;        // total de bajas
+int evoE_rs = 0;         // evocaciones Exitosas
+int evoF_rs = 0;         // evocaciones Fracasan
+int consultadas_rs = 0;  // celdas consultados dentro de localizar
+float alta_nCorr_rs = 0; // numero de corrimientos en altas
+float alta_MCorr_rs = 0; // Maximo de corrimientos en altas
+float baja_nCorr_rs = 0; // numero de corrimientos en bajas
+float baja_MCorr_rs = 0; // Maximo de corrimientos en bajas
+int nodosConsE_rs = 0;   // Cantidad de nodos consultados en evocaciones Exitosas
+int Max_EvoE_rs = 0;     // Maximo de nodos consultados en evocaciones Exitosas
+int nodosConsF_rs = 0;   // Cantidad de nodos consultados en evocaciones de Fracaso
+int Max_EvoF_rs = 0;     // Maximo de nodos consultados en evocaciones de Fracaso
+
 
 /* FIN VARIABLES */
 
@@ -38,9 +53,18 @@ void encabezado();
 void borrar_salto(Articulo *art);
 void limpiar_contadores();
 
-// -- A.B.B.
+// -- R.A.L
 
-// -- L.I.
+// -- R.S
+int localizar_LVD(pNodo,char [],pNodo*,pNodo*);
+int localizar_RS(char[], pNodo*, pNodo*,int*);
+
+int alta_RS(Articulo);
+int baja_RS(char[],int);
+void mostrar_LVD(pNodo);
+void mostrar_RS();
+void mostrarSoloElementos_RS();
+Articulo evocar_RS(char[],int*);
 
 
 /* FIN PROTOTIPOS */
@@ -72,7 +96,9 @@ void imprimirArt(Articulo Art)
 
 void limpiar_contadores()   // Inicializa todos los contadores usados en la comparacion de las estrcuturas.
 {
-
+    int k;
+    for(k=0;k<M;k++)RS[k]=NULL;
+    cant_RS=0;
 
 }
 
@@ -102,7 +128,7 @@ void memorizacion_previa(int estr) // estr: 1.RAL || 2.RS
                     /*alta_RAL(nuevo);*/
                     break;
                 case 2:
-                    /*alta_RS(nuevo);*/
+                    alta_RS(nuevo);
                     break;
             }
         }
@@ -114,7 +140,7 @@ void memorizacion_previa(int estr) // estr: 1.RAL || 2.RS
 char confirmacion_baja(Articulo baja)
 {
     char c;
-    printf("\n Codigo: \t%s"
+    /*printf("\n Codigo: \t%s"
            "\n Articulo: \t%s"
            "\n Marca: \t%s"
            "\n Valor: \t$%.2f"
@@ -125,7 +151,8 @@ char confirmacion_baja(Articulo baja)
            baja.marca,
            baja.valor,
            baja.cantidad,
-           baja.club);
+           baja.club);*/
+    imprimirArt(baja);
     printf("\n\nEsta seguro que quiere eliminar este articulo? S/N: ");
     fflush(stdin);
     scanf("%c", &c);
@@ -192,16 +219,16 @@ void lectura_archivo_operaciones()
             switch(cod_op)
             {
                 case 1:
-                    /*alta_RAL(nuevo);
-                    alta_RS(nuevo);*/
+                    //alta_RAL(nuevo);
+                    alta_RS(nuevo);
                     break;
                 case 2:
-                    /*baja_RAL(nuevo.codigo,1);
-                    baja_RS(nuevo.codigo,1);*/
+                    //baja_RAL(nuevo.codigo,1);
+                    baja_RS(nuevo.codigo,1);
                     break;
                 case 3:
-                    /*evocar_RAL(nuevo.codigo,&aux);
-                    evocar_RS(nuevo.codigo);*/
+                    //evocar_RAL(nuevo.codigo,&aux);
+                    evocar_RS(nuevo.codigo,&aux);
                     break;
 
             }
