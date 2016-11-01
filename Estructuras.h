@@ -54,6 +54,10 @@ void borrar_salto(Articulo *art);
 void limpiar_contadores();
 
 // -- R.A.L
+int localizar_RAL(char codArt[],int *h, int *pos);
+int alta_RAL(Articulo nuevo);
+int baja_RAL(char codArt[], int tipo);
+void mostrar_RAL();
 
 // -- R.S
 int localizar_LVD(pNodo,char [],pNodo*,pNodo*);
@@ -125,7 +129,7 @@ void memorizacion_previa(int estr) // estr: 1.RAL || 2.RS
             switch(estr)
             {
                 case 1:
-                    /*alta_RAL(nuevo);*/
+                    alta_RAL(nuevo);
                     break;
                 case 2:
                     alta_RS(nuevo);

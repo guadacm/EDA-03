@@ -155,7 +155,7 @@ int localizar_LVD(pNodo Lista, char codArt[],pNodo *actual, pNodo *anterior){
 }
 
 int localizar_RS(char codArt[], pNodo *actual, pNodo *anterior, int *h){
-    int exito;
+    //int exito;
     *h=hashing(codArt);
     return localizar_LVD(RS[*h],codArt,&(*actual),&(*anterior));
 }
