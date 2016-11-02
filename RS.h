@@ -8,13 +8,11 @@ pNodo prueba;
 
 void menu_RS(int *op)
 {
-
-
     while (*op != 0)
     {
         encabezado();
         printf("\n\t\t           Rebalse Separado             \n"
-                 "\t\t           ----------------             \n");
+               "\t\t           ----------------             \n");
         printf("\n[1] Nuevo articulo"
                "\n[2] Eliminar articulo"
                "\n[3] Consultar articulo"
@@ -30,222 +28,283 @@ void menu_RS(int *op)
             break;
 
         case 1: // Alta
-            {
-                encabezado();
-                printf("\n\t\t           Rebalse Separado             \n"
-                         "\t\t           ----------------             \n");
-                Articulo nuevo;
-                printf("\n[1] Nuevo articulo"
-                       "\n\n Codigo: \t");
-                fflush(stdin);
-                scanf("%s", nuevo.codigo);
-                strupr(nuevo.codigo);
-                printf(" Articulo:\t");
-                fflush(stdin);
-                scanf(" %[^\n]",nuevo.articulo);
-                printf(" Marca:\t\t");
-                fflush(stdin);
-                scanf(" %[^\n]",nuevo.marca);
-                printf(" Club:\t\t");
-                fflush(stdin);
-                scanf(" %[^\n]",nuevo.club);
-                printf(" Cantidad:\t");
-                fflush(stdin);
-                scanf("%d",&nuevo.cantidad);
-                printf(" Valor($):\t");
-                fflush(stdin);
-                scanf("%f",&nuevo.valor);
-                if(alta_RS(nuevo) == 1) printf("\n El articulo fue agregado con exito\n\n");
-                else printf("\nError, el codigo %s ya existe \n\n",nuevo.codigo);
-                system("pause");
-                break;
-            }
+        {
+            encabezado();
+            printf("\n\t\t           Rebalse Separado             \n"
+                   "\t\t           ----------------             \n");
+            Articulo nuevo;
+            printf("\n[1] Nuevo articulo"
+                   "\n\n Codigo: \t");
+            fflush(stdin);
+            scanf("%s", nuevo.codigo);
+            strupr(nuevo.codigo);
+            printf(" Articulo:\t");
+            fflush(stdin);
+            scanf(" %[^\n]",nuevo.articulo);
+            printf(" Marca:\t\t");
+            fflush(stdin);
+            scanf(" %[^\n]",nuevo.marca);
+            printf(" Club:\t\t");
+            fflush(stdin);
+            scanf(" %[^\n]",nuevo.club);
+            printf(" Cantidad:\t");
+            fflush(stdin);
+            scanf("%d",&nuevo.cantidad);
+            printf(" Valor($):\t");
+            fflush(stdin);
+            scanf("%f",&nuevo.valor);
+            if(alta_RS(nuevo) == 1) printf("\n El articulo fue agregado con exito\n\n");
+            else printf("\nError, el codigo %s ya existe \n\n",nuevo.codigo);
+            system("pause");
+            break;
+        }
         case 2: // Baja
-            {
-                encabezado();
-                printf("\n\t\t           Rebalse Separado             \n"
-                         "\t\t           ----------------             \n");
+        {
+            encabezado();
+            printf("\n\t\t           Rebalse Separado             \n"
+                   "\t\t           ----------------             \n");
 
-                printf("\n[2] Eliminar articulo"
-                       "\n\n Codigo: \t");
-                fflush(stdin);
-                scanf("%s",c);
-                strupr(c);
-                if(baja_RS(c,0)==1) printf("\nEl articulo %s fue eliminado con exito\n\n",c);
-                else printf("\nEl articulo %s no fue eliminado o no existe\n\n",c);
-                system("pause");
-                break;
-            }
+            printf("\n[2] Eliminar articulo"
+                   "\n\n Codigo: \t");
+            fflush(stdin);
+            scanf("%s",c);
+            strupr(c);
+            if(baja_RS(c,0)==1) printf("\nEl articulo %s fue eliminado con exito\n\n",c);
+            else printf("\nEl articulo %s no fue eliminado o no existe\n\n",c);
+            system("pause");
+            break;
+        }
         case 3: // Consulta
+        {
+            encabezado();
+            printf("\n\t\t           Rebalse Separado             \n"
+                   "\t\t           ----------------             \n");
+            printf("\n[3] Consultar articulo\n"
+                   "\n\n Codigo: \t");
+            int aux;
+            Articulo temp;
+            fflush(stdin);
+            scanf("%s",c);
+            strupr(c);
+            temp=evocar_RS(c,&aux);
+            if (aux==1)
             {
-                encabezado();
-                printf("\n\t\t           Rebalse Separado             \n"
-                         "\t\t           ----------------             \n");
-                printf("\n[3] Consultar articulo\n"
-                       "\n\n Codigo: \t");
-                int aux;
-                Articulo temp;
-                fflush(stdin);
-                scanf("%s",c);
-                strupr(c);
-                temp=evocar_RS(c,&aux);
-                if (aux==1)
-                {
-                    imprimirArt(temp);
-                }
-                else printf("\n\t El articulo %s no existe\n\n",c);
-                system("pause");
-                break;
+                imprimirArt(temp);
             }
+            else printf("\n\t El articulo %s no existe\n\n",c);
+            system("pause");
+            break;
+        }
         case 4: // Mostrar
+        {
+            encabezado();
+            int ord;
+            printf("\n\t\t           Rebalse Separado             \n"
+                   "\t\t           ----------------             \n");
+            printf("\n[4] Mostrar Estructura\n");
+            //if (cant_RS==0) printf("\n\t Estructura VACIA...\n");
+            encabezado();
+            printf("Opciones de Mostrar Estructura del RS: \n");
+            printf("_________________________\n");
+            printf("\n [1] Como lo sugiere el Practico.");
+            printf("\n [2] Solo articulos de la estructura.");
+            printf("\n\n Elija una Opcion: ");
+            fflush(stdin);
+            scanf("%d",&ord);
+            encabezado();
+            printf("\n-------------------------- LISTA DE ARTICULOS --------------------------\n");
+            switch(ord)
             {
-                encabezado();
-                int ord;
-                printf("\n\t\t           Rebalse Separado             \n"
-                         "\t\t           ----------------             \n");
-                printf("\n[4] Mostrar Estructura\n");
-                //if (cant_RS==0) printf("\n\t Estructura VACIA...\n");
-                encabezado();
-                printf("Opciones de Mostrar Estructura del RS: \n");
-                printf("_________________________\n");
-                printf("\n [1] Como lo sugiere el Practico.");
-                printf("\n [2] Solo articulos de la estructura.");
-                printf("\n\n Elija una Opcion: ");
-                fflush(stdin);
-                scanf("%d",&ord);
-                encabezado();
-                printf("\n-------------------------- LISTA DE ARTICULOS --------------------------\n");
-                switch(ord){
-                     case 1:
-                        printf("     \t\t(Mostrar: como lo sugiere el Practico)");
-                        mostrar_RS();
-                        break;
+            case 1:
+                printf("     \t\t(Mostrar: como lo sugiere el Practico)");
+                mostrar_RS();
+                break;
 
-                    case 2:
-                        printf("\t Mostrar: Solo articulos (sin lugares vacios)\n");
-                        mostrarSoloElementos_RS();
-                        break;
-                    }
-                printf("\n\tTotal de Articulos: %d\n",cant_RS);
-                system("pause");
+            case 2:
+                printf("\t Mostrar: Solo articulos (sin lugares vacios)\n");
+                mostrarSoloElementos_RS();
                 break;
             }
+            printf("\n\tTotal de Articulos: %d\n",cant_RS);
+            system("pause");
+            break;
+        }
         case 5: // Memorizacion
-            {
-                encabezado();
-                printf("\n\t\t           Rebalse Separado             \n"
-                         "\t\t           ----------------             \n");
-                printf("\n[5] Memorizacion Previa\n");
-                memorizacion_previa(2);
-                system("pause");
-                break;
-            }
+        {
+            encabezado();
+            printf("\n\t\t           Rebalse Separado             \n"
+                   "\t\t           ----------------             \n");
+            printf("\n[5] Memorizacion Previa\n");
+            memorizacion_previa(2);
+            system("pause");
+            break;
+        }
         }
     }
     *op = -1;
 }
 
-int localizar_LVD(pNodo Lista, char codArt[],pNodo *actual, pNodo *anterior){
+int localizar_LVD(pNodo Lista, char codArt[],pNodo *actual, pNodo *anterior/*, int *nodosCons_L*/)
+{
+    consultadas_rs=1;  //empieza desde 1, porque estoy consultando una lista, lo que significa que ya consulte la celda de la cabezera de la misma
     (*anterior) = (*actual) = Lista;
-    while((*actual)!=NULL && strcmp(codArt,(*actual)->a.codigo)!=0){
+    while((*actual)!=NULL && strcmp(codArt,(*actual)->a.codigo)!=0)
+    {
+        consultadas_rs++;
+        //(*nodosCons_L)++;
         (*anterior)=(*actual);
         (*actual)=(*actual)->sig;
     }
+    if((*actual)!=NULL) consultadas_rs++; //significa que no entro al while, porque el codigo era el buscado, cuento la consulta de esa celda
+    //printf("\nconsulta en lista: %d ",*nodosCons_L);
     return (*actual!=NULL);
 }
 
-int localizar_RS(char codArt[], pNodo *actual, pNodo *anterior, int *h){
-    //int exito;
+int localizar_RS(char codArt[], pNodo *actual, pNodo *anterior, int *h,int conCosto)
+{
+    int exito;//,consultaEnLista;
+    //consultaEnLista = 1;
     *h=hashing(codArt);
-    return localizar_LVD(RS[*h],codArt,&(*actual),&(*anterior));
+    exito=localizar_LVD(RS[*h],codArt,&(*actual),&(*anterior)/*,&consultaEnLista*/);
+    if (conCosto && exito)
+    {
+        nodosConsE_rs+=consultadas_rs;
+    }
+    if (conCosto && !exito)
+    {
+        nodosConsF_rs+=consultadas_rs;
+    }
+    return exito;
 }
 
-int alta_RS(Articulo nuevo){
+int alta_RS(Articulo nuevo)
+{
     int exito,h;
     pNodo actual, anterior, aux;
-    exito=localizar_RS(nuevo.codigo, &actual, &anterior, &h);
+    exito=localizar_RS(nuevo.codigo, &actual, &anterior, &h,0);
     if(exito) return 0;
-    else{
+    else
+    {
         aux = RS[h];                            // a aux le doy el acceso(cabecera) de la lista que esta en la posicion h
         RS[h] = (pNodo)malloc(sizeof(nodo));    // pido memoria para el nuevo nodo, al comienzo de la lista (inserto en la cabeza)
         RS[h]->a = nuevo;                       // coloco la informacion de la n-upla (datos del articulo) en el nodo
         RS[h]->sig = aux;                       // al nuevo nodo-> le doy el resto de la lista que habia antes
+        alta_nCorr_rs+=1;
+        if (alta_MCorr_rs < 1) alta_MCorr_rs = 1;
         cant_RS++;
+        altas_rs++;
         return 1;
     }
 }
 
-int baja_RS(char codArt[],int tipo){
+int baja_RS(char codArt[],int tipo)
+{
     int exito,h;
     char c = 'S';
     pNodo actual, anterior;
-    exito=localizar_RS(codArt, &actual, &anterior, &h);
+    exito=localizar_RS(codArt, &actual, &anterior, &h,0);
     if(!exito) return 0;
-    else{
+    else
+    {
         if(tipo == 0) c = confirmacion_baja(actual->a);
         if(c == 'N' || c == 'n' ) return 0;
 
-        if(strcmp(anterior->a.codigo,actual->a.codigo)==0){
+        if(strcmp(anterior->a.codigo,actual->a.codigo)==0)
+        {
             RS[h]=actual->sig;
+            baja_nCorr_rs += 0.5;
+            if (baja_MCorr_rs < 0.5) baja_MCorr_rs = 0.5;
             free(actual);
-            printf("\n Caso de baja 1");
+            //printf("\n Caso de baja 1");
         }
-        else{
+        else
+        {
+            baja_nCorr_rs += 0.5;
+            if (baja_MCorr_rs < 0.5) baja_MCorr_rs = 0.5;
             anterior->sig = actual->sig;
             free(actual);
-            printf("\n Caso de baja 2");
+            //printf("\n Caso de baja 2");
         }
-    cant_RS--;
-    return 1;
+        cant_RS--;
+        bajas_rs++;
+        return 1;
     }
 }
 
-void modificar_RS(char codArt[]){
+void modificar_RS(char codArt[])
+{
 
 }
 
-void mostrar_RS(){
+void mostrar_RS()
+{
     int i,j;
     j=0;
-    for(i=0;i<M;i++){
-        if(RS[i]!=NULL){
+    for(i=0; i<M; i++)
+    {
+        if(RS[i]!=NULL)
+        {
             printf("\nPosicion [%d]:",i);
             mostrar_LVD(RS[i]);
-            if ((j % 5) == 0){system("\n pause");}j++;  //Limitador de articulos a mostrar
+            if ((j % 5) == 0)
+            {
+                system("\n pause");
+            }
+            j++;  //Limitador de articulos a mostrar
         }
         else printf("\nPosicion [%d]: Vacio.",i);
     }
 }
 
-void mostrarSoloElementos_RS(){
+void mostrarSoloElementos_RS()
+{
     int i,j;
     j=0;
-    for(i=0;i<M;i++){
-        if(RS[i]!=NULL){
+    for(i=0; i<M; i++)
+    {
+        if(RS[i]!=NULL)
+        {
             printf("\nPosicion [%d]:",i);
             mostrar_LVD(RS[i]);
-            if ((j % 5) == 0){system("\n pause");}j++;  //Limitador de articulos a mostrar
+            if ((j % 5) == 0)
+            {
+                system("\n pause");
+            }
+            j++;  //Limitador de articulos a mostrar
         }
     }
 }
 
-void mostrar_LVD(pNodo Lista){
+void mostrar_LVD(pNodo Lista)
+{
     pNodo L = Lista;
-    while(L!=NULL) {
+    while(L!=NULL)
+    {
         imprimirArt(L->a);
         L=L->sig;
     }
 }
 
-Articulo evocar_RS(char codArt[],int *exito){
+Articulo evocar_RS(char codArt[],int *exito)
+{
     int h;
     Articulo temp;
     pNodo actual, anterior;
-    *exito=localizar_RS(codArt, &actual, &anterior, &h);
-    if(*exito){
+    *exito=localizar_RS(codArt, &actual, &anterior, &h,1);
+    if(*exito)
+    {
+        evoE_rs++;
+        //nodosConsE_rs += consultadas_rs;
+        if (Max_EvoE_rs < consultadas_rs) Max_EvoE_rs=consultadas_rs;
+        //printf("\nConsultadas_RS, exito: %d",consultadas_rs);
         return actual->a;
     }
-    else{
+    else
+    {
+        evoF_rs++;
+        //nodosConsF_rs += consultadas_rs;
+        if (Max_EvoF_rs < consultadas_rs) Max_EvoF_rs=consultadas_rs;
+        //printf("\nConsultadas_RS, fracaso: %d",consultadas_rs);
         return temp;
     }
 }

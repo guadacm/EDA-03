@@ -70,8 +70,8 @@ Articulo evocar_RAL(char codArt[], int *exito);
 void mostrar_RAL();
 
 // -- R.S
-int localizar_LVD(pNodo,char [],pNodo*,pNodo*);
-int localizar_RS(char[], pNodo*, pNodo*,int*);
+int localizar_LVD(pNodo,char [],pNodo*,pNodo*/*,int**/);
+int localizar_RS(char[], pNodo*, pNodo*,int*,int);
 
 int alta_RS(Articulo);
 int baja_RS(char[],int);
@@ -111,9 +111,32 @@ void imprimirArt(Articulo Art)
 
 void limpiar_contadores()   // Inicializa todos los contadores usados en la comparacion de las estrcuturas.
 {
+    //Inicializacion R.S.
     int k;
+
     for(k=0; k<M; k++)RS[k]=NULL;
     cant_RS=0;
+
+    for(k=0;k<M;k++)RS[k]=NULL;
+
+    //Variables R.S.
+    cant_RS = 0;
+    altas_rs = 0;
+    bajas_rs = 0;
+    evoE_rs = 0;
+    evoF_rs = 0;
+    alta_nCorr_rs = 0;
+    altas_rs = 0;
+    alta_MCorr_rs = 0;
+
+    consultadas_rs = 0;
+    nodosConsE_rs = 0;
+    Max_EvoE_rs = 0;
+    nodosConsF_rs = 0;
+    Max_EvoF_rs = 0;
+
+
+    //Variables R.A.L
 
     cant_RAL = 0;
     int i;

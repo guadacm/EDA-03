@@ -38,7 +38,7 @@ void administracion()
         switch (opcion)
         {
             case 0: break;
-            case 1: menu_RAL(&opcion); break;
+            //case 1: menu_RAL(&opcion); break;
             case 2: menu_RS(&opcion); break;
         }
     }
@@ -60,27 +60,49 @@ void comparacion()
            "\t\t\tTotal de Articulos: %d\n"
            "\t\t       --------------------------       \n"
 
+           "\n Cant. de Altas:\t\tRAL: d \tRS: %d "
+           "\n Cant. de Bajas:\t\tRAL: d \tRS: %d "
            "\n Cant. de Evocaciones-Exito:\tRAL: %d \tRS: %d "
            "\n Cant. de Evocaciones-Fracaso:\tRAL: %d \tRS: %d\n",
-           cant_RAL,
-           evoE_RAL, 0,
-           evoF_RAL, 0);
+           cant_RS,
+           altas_rs,
+           bajas_rs,
+           evoE_RAL, evoE_rs,
+           evoF_RAL, evoF_rs);
+
+    /*printf("\n Costos de Altas:"
+           "\n------------------------------------"
+           "\n\tMEDIOS:\t\tMAXIMOS:"
+           "\n RAL:\t .2f\t\t .2f"
+           "\n RS:\t%.2f\t\t%.2f",
+           alta_nCorr_rs/(float)altas_rs,alta_MCorr_rs
+
+           );
+
+    printf("\n\n Costos de Bajas:"
+             "\n------------------------------------"
+           "\n\tMEDIOS:\t\tMAXIMOS:"
+           "\n RAL:\t .2f\t\t .2f"
+           "\n RS:\t%.2f\t\t%.2f",
+           baja_nCorr_rs/(float)bajas_rs, baja_MCorr_rs
+
+           );*/
 
     printf("\n\n Costos de Evocaciones Exitosas:"
              "\n------------------------------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\n RAL:\t%.2f\t\t%d"
+           "\n RAL:\t %.2f\t\t %d"
            "\n RS:\t%.2f\t\t%d",
            (float)consultas_evoE_RAL/(float)evoE_RAL, max_evoE_RAL,
-           (float)0/(float)0, 0);
+           (float)nodosConsE_rs/(float)evoE_rs, Max_EvoE_rs);
 
     printf("\n\n Costos de Evocaciones NO Exitosas:"
              "\n------------------------------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\n RAL:\t%.2f\t\t%d"
+           "\n RAL:\t %.2f\t\t %d"
            "\n RS:\t%.2f\t\t%d \n\n",
            (float)consultas_evoF_RAL/(float)evoF_RAL, max_evoF_RAL,
-           (float)0/(float)0, 0);
+           (float)nodosConsF_rs/(float)evoF_rs,Max_EvoF_rs);
 
     system("pause");
 }
