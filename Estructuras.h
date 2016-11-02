@@ -60,8 +60,8 @@ int baja_RAL(char codArt[], int tipo);
 void mostrar_RAL();
 
 // -- R.S
-int localizar_LVD(pNodo,char [],pNodo*,pNodo*);
-int localizar_RS(char[], pNodo*, pNodo*,int*);
+int localizar_LVD(pNodo,char [],pNodo*,pNodo*/*,int**/);
+int localizar_RS(char[], pNodo*, pNodo*,int*,int);
 
 int alta_RS(Articulo);
 int baja_RS(char[],int);
@@ -100,9 +100,28 @@ void imprimirArt(Articulo Art)
 
 void limpiar_contadores()   // Inicializa todos los contadores usados en la comparacion de las estrcuturas.
 {
+    //Inicializacion R.S.
     int k;
     for(k=0;k<M;k++)RS[k]=NULL;
-    cant_RS=0;
+
+    //Variables R.S.
+    cant_RS = 0;
+    altas_rs = 0;
+    bajas_rs = 0;
+    evoE_rs = 0;
+    evoF_rs = 0;
+    alta_nCorr_rs = 0;
+    altas_rs = 0;
+    alta_MCorr_rs = 0;
+
+    consultadas_rs = 0;
+    nodosConsE_rs = 0;
+    Max_EvoE_rs = 0;
+    nodosConsF_rs = 0;
+    Max_EvoF_rs = 0;
+
+
+    //Variables R.A.L
 
 }
 
@@ -129,7 +148,7 @@ void memorizacion_previa(int estr) // estr: 1.RAL || 2.RS
             switch(estr)
             {
                 case 1:
-                    alta_RAL(nuevo);
+                    //alta_RAL(nuevo);
                     break;
                 case 2:
                     alta_RS(nuevo);
