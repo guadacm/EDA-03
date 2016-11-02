@@ -17,14 +17,16 @@ typedef struct Articulo
 /* VARIABLES */
 // -- R.A.L
 Articulo RAL[M];    //Definicion del Rebalse Abierto Lineal, de dimensión M.
-int cant_RAL;       // Cantidad de elementos almacenados
-int evoE_RAL;       // Cantidad de evocaciones exitosas en RAL
-int evoF_RAL;       // Cantidad de evocaciones que fracasan en RAL
-int consultas_evoE_RAL;
-int consultas_evoF_RAL;
-int consultas_RAL;      // Cantidad de baldes consultados en una evocacion
-int max_evoE_RAL;   // Maximo de baldes consultados en una evocacion exitosa
-int max_evoF_RAL;   // Maximo de baldes consuktadis en una evocacion que fracasa
+int cant_RAL = 0;       // Cantidad de elementos almacenados
+int evoE_RAL = 0;       // Cantidad de evocaciones exitosas en RAL
+int evoF_RAL = 0;       // Cantidad de evocaciones que fracasan en RAL
+int consultas_evoE_RAL = 0;
+int consultas_evoF_RAL = 0;
+int consultas_RAL = 0;      // Cantidad de baldes consultados en una evocacion
+int max_evoE_RAL = 0;   // Maximo de baldes consultados en una evocacion exitosa
+int max_evoF_RAL = 0;   // Maximo de baldes consuktadis en una evocacion que fracasa
+int altas_RAL = 0;
+int bajas_RAL = 0;
 
 // -- R.S.
 
@@ -144,6 +146,11 @@ void limpiar_contadores()   // Inicializa todos los contadores usados en la comp
         strcpy(RAL[i].codigo, "*");
     evoE_RAL = 0;
     evoF_RAL = 0;
+    consultas_evoE_RAL = 0;
+    consultas_evoF_RAL = 0;
+    altas_RAL = 0;
+    bajas_RAL = 0;
+
     max_evoE_RAL = 0;
     max_evoF_RAL = 0;
 }
@@ -278,11 +285,11 @@ void lectura_archivo_operaciones()
                 alta_RS(nuevo);
                 break;
             case 2:
-                baja_RAL(nuevo.codigo,1);
+                baja_RAL(nuevo.codigo, 1);
                 baja_RS(nuevo.codigo,1);
                 break;
             case 3:
-                evocar_RAL(nuevo.codigo,&aux);
+                evocar_RAL(nuevo.codigo, &aux);
                 evocar_RS(nuevo.codigo,&aux);
                 break;
 

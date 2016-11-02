@@ -38,7 +38,7 @@ void administracion()
         switch (opcion)
         {
             case 0: break;
-            //case 1: menu_RAL(&opcion); break;
+            case 1: menu_RAL(&opcion); break;
             case 2: menu_RS(&opcion); break;
         }
     }
@@ -57,16 +57,16 @@ void comparacion()
 
     encabezado();
     printf("\t\t       Comparacion de estructuras       \n"
-           "\t\t\tTotal de Articulos: %d\n"
+           "\t\t\tTotal de Articulos: %d  %d\n"
            "\t\t       --------------------------       \n"
 
-           "\n Cant. de Altas:\t\tRAL: d \tRS: %d "
-           "\n Cant. de Bajas:\t\tRAL: d \tRS: %d "
+           "\n Cant. de Altas:\t\tRAL: %d \tRS: %d "
+           "\n Cant. de Bajas:\t\tRAL: %d \tRS: %d "
            "\n Cant. de Evocaciones-Exito:\tRAL: %d \tRS: %d "
            "\n Cant. de Evocaciones-Fracaso:\tRAL: %d \tRS: %d\n",
-           cant_RS,
-           altas_rs,
-           bajas_rs,
+           cant_RS, cant_RAL,
+           altas_RAL, altas_rs,
+           bajas_RAL, bajas_rs,
            evoE_RAL, evoE_rs,
            evoF_RAL, evoF_rs);
 
@@ -91,7 +91,7 @@ void comparacion()
     printf("\n\n Costos de Evocaciones Exitosas:"
              "\n------------------------------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\n RAL:\t %.2f\t\t %d"
+           "\n RAL:\t%.2f\t\t%d"
            "\n RS:\t%.2f\t\t%d",
            (float)consultas_evoE_RAL/(float)evoE_RAL, max_evoE_RAL,
            (float)nodosConsE_rs/(float)evoE_rs, Max_EvoE_rs);
@@ -99,7 +99,7 @@ void comparacion()
     printf("\n\n Costos de Evocaciones NO Exitosas:"
              "\n------------------------------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\n RAL:\t %.2f\t\t %d"
+           "\n RAL:\t%.2f\t\t%d"
            "\n RS:\t%.2f\t\t%d \n\n",
            (float)consultas_evoF_RAL/(float)evoF_RAL, max_evoF_RAL,
            (float)nodosConsF_rs/(float)evoF_rs,Max_EvoF_rs);

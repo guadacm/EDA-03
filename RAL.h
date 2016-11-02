@@ -128,12 +128,11 @@ int localizar_RAL(char codArt[],int *h, int *pos) // en h guardo el valor que me
 {
     consultas_RAL = 0;
     *h = hashing(codArt);
-
+    *pos = *h;
     if(cant_RAL > 0)
     {
         int i = *h;
-        *pos = *h;
-        int f = 0;
+        int f = 0; // si esta en 1 me dice que ya guardo en pos una celda libre
         consultas_RAL++;
         while(strcmp(RAL[i].codigo, codArt) != 0 && strcmp(RAL[i].codigo, "*") != 0)
         {
@@ -145,14 +144,21 @@ int localizar_RAL(char codArt[],int *h, int *pos) // en h guardo el valor que me
             i = (i + 1) % M;
             consultas_RAL++;
         }
+        if(strcmp(RAL[i].codigo, "*") == 0 && f == 0)
+            *pos = i;
         if(strcmp(RAL[i].codigo, codArt) == 0)
+        {
+            *pos = i;
             return 1;
+        }
         else
+        {
             return 0;
+        }
+
     }
     else
     {
-        *pos = *h;
         return 0;
     }
 }
@@ -166,6 +172,7 @@ int alta_RAL(Articulo nuevo)
         {
             RAL[pos] = nuevo;
             cant_RAL++;
+            altas_RAL++;
             return 1;
         }
         else
@@ -188,6 +195,7 @@ int baja_RAL(char codArt[], int tipo) // tipo es para hacer o no la confirmacion
 
             strcpy(RAL[pos].codigo, "#");
             cant_RAL--;
+            bajas_RAL++;
             return 1;
         }
         else
