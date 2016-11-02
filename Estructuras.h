@@ -4,23 +4,32 @@
 #define DIM 170
 #define M 251   //Nº primo siguiente a M = 170/0.7 (N = 170, Ro = 0.7)
 
-typedef struct Articulo{
-	char codigo[8];
-	char articulo[52];
-	char marca[62];
-	float valor;
-	int cantidad;
-	char club[72];
+typedef struct Articulo
+{
+    char codigo[8];
+    char articulo[52];
+    char marca[62];
+    float valor;
+    int cantidad;
+    char club[72];
 } Articulo;
 
 /* VARIABLES */
 // -- R.A.L
 Articulo RAL[M];    //Definicion del Rebalse Abierto Lineal, de dimensión M.
-int cant_RAL;
+int cant_RAL;       // Cantidad de elementos almacenados
+int evoE_RAL;       // Cantidad de evocaciones exitosas en RAL
+int evoF_RAL;       // Cantidad de evocaciones que fracasan en RAL
+int consultas_evoE_RAL;
+int consultas_evoF_RAL;
+int consultas_RAL;      // Cantidad de baldes consultados en una evocacion
+int max_evoE_RAL;   // Maximo de baldes consultados en una evocacion exitosa
+int max_evoF_RAL;   // Maximo de baldes consuktadis en una evocacion que fracasa
 
 // -- R.S.
 
-typedef struct Nodo{
+typedef struct Nodo
+{
     Articulo a;
     struct Nodo* sig;
 } nodo;
@@ -57,6 +66,7 @@ void limpiar_contadores();
 int localizar_RAL(char codArt[],int *h, int *pos);
 int alta_RAL(Articulo nuevo);
 int baja_RAL(char codArt[], int tipo);
+Articulo evocar_RAL(char codArt[], int *exito);
 void mostrar_RAL();
 
 // -- R.S
@@ -73,11 +83,12 @@ Articulo evocar_RS(char[],int*);
 
 /* FIN PROTOTIPOS */
 
-int hashing (char codArt[]){
+int hashing (char codArt[])
+{
     int longitud, i;
     int contador = 0;
     longitud = strlen(codArt);
-    for(i=0;i<longitud;i++)
+    for(i=0; i<longitud; i++)
         contador += (((int)codArt[i]) * (i+1));
     return (contador % M);
 }
@@ -90,20 +101,28 @@ void imprimirArt(Articulo Art)
            "\n Valor: \t$%.2f"
            "\n Cantidad: \t%d"
            "\n Club: \t\t%s\n",
-            Art.codigo,
-            Art.articulo,
-            Art.marca,
-            Art.valor,
-            Art.cantidad,
-            Art.club);
+           Art.codigo,
+           Art.articulo,
+           Art.marca,
+           Art.valor,
+           Art.cantidad,
+           Art.club);
 }
 
 void limpiar_contadores()   // Inicializa todos los contadores usados en la comparacion de las estrcuturas.
 {
     int k;
-    for(k=0;k<M;k++)RS[k]=NULL;
+    for(k=0; k<M; k++)RS[k]=NULL;
     cant_RS=0;
 
+    cant_RAL = 0;
+    int i;
+    for(i = 0; i < M; i++)      // Inicializo el RAL con la marca de celda virgen
+        strcpy(RAL[i].codigo, "*");
+    evoE_RAL = 0;
+    evoF_RAL = 0;
+    max_evoE_RAL = 0;
+    max_evoF_RAL = 0;
 }
 
 void memorizacion_previa(int estr) // estr: 1.RAL || 2.RS
@@ -128,12 +147,12 @@ void memorizacion_previa(int estr) // estr: 1.RAL || 2.RS
 
             switch(estr)
             {
-                case 1:
-                    alta_RAL(nuevo);
-                    break;
-                case 2:
-                    alta_RS(nuevo);
-                    break;
+            case 1:
+                alta_RAL(nuevo);
+                break;
+            case 2:
+                alta_RS(nuevo);
+                break;
             }
         }
         printf("\n\nLa memorizacion se ha llevado a cabo\n\n");
@@ -160,34 +179,43 @@ char confirmacion_baja(Articulo baja)
     printf("\n\nEsta seguro que quiere eliminar este articulo? S/N: ");
     fflush(stdin);
     scanf("%c", &c);
-    while (!(c=='S' || c=='s' || c=='N' || c=='n')){
+    while (!(c=='S' || c=='s' || c=='N' || c=='n'))
+    {
         printf("\nIntente de nuevo. Solo se admiten las letras ( S - s - N - n )\n");
         fflush(stdin);
         scanf("%c", &c);
-        }
+    }
     return c;
 }
 
 void borrar_salto(Articulo *art) //Borra en '\n' que almacena fgets.
 {
     int i = 0;
-    for (i = 0; i < 8; i++) { //Codigo
-        if ((*art).codigo[i] == '\n') {
+    for (i = 0; i < 8; i++)   //Codigo
+    {
+        if ((*art).codigo[i] == '\n')
+        {
             (*art).codigo[i] = '\0';
         }
     }
-    for (i = 0; i < 52; i++) { //Articulo
-        if ((*art).articulo[i] == '\n') {
+    for (i = 0; i < 52; i++)   //Articulo
+    {
+        if ((*art).articulo[i] == '\n')
+        {
             (*art).articulo[i] = '\0';
         }
     }
-    for (i = 0; i < 62; i++) { //Marca
-        if ((*art).marca[i] == '\n') {
+    for (i = 0; i < 62; i++)   //Marca
+    {
+        if ((*art).marca[i] == '\n')
+        {
             (*art).marca[i] = '\0';
         }
     }
-    for (i = 0; i < 72; i++) { //Club
-        if ((*art).club[i] == '\n') {
+    for (i = 0; i < 72; i++)   //Club
+    {
+        if ((*art).club[i] == '\n')
+        {
             (*art).club[i] = '\0';
         }
     }
@@ -222,18 +250,18 @@ void lectura_archivo_operaciones()
 
             switch(cod_op)
             {
-                case 1:
-                    //alta_RAL(nuevo);
-                    alta_RS(nuevo);
-                    break;
-                case 2:
-                    //baja_RAL(nuevo.codigo,1);
-                    baja_RS(nuevo.codigo,1);
-                    break;
-                case 3:
-                    //evocar_RAL(nuevo.codigo,&aux);
-                    evocar_RS(nuevo.codigo,&aux);
-                    break;
+            case 1:
+                alta_RAL(nuevo);
+                alta_RS(nuevo);
+                break;
+            case 2:
+                baja_RAL(nuevo.codigo,1);
+                baja_RS(nuevo.codigo,1);
+                break;
+            case 3:
+                evocar_RAL(nuevo.codigo,&aux);
+                evocar_RS(nuevo.codigo,&aux);
+                break;
 
             }
         }

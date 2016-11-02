@@ -60,46 +60,26 @@ void comparacion()
            "\t\t\tTotal de Articulos: %d\n"
            "\t\t       --------------------------       \n"
 
-           "\n Cant. de Altas:\t\tABB: %d \tLI: %d "
-           "\n Cant. de Bajas:\t\tABB: %d \tLI: %d "
-           "\n Cant. de Evocaciones-Exito:\tABB: %d \tLI: %d "
-           "\n Cant. de Evocaciones-Fracaso:\tABB: %d \tLI: %d\n",
-           0,
-           0, 0,
-           0, 0,
-           0, 0,
-           0, 0);
-
-    printf("\n Costos de Altas:"
-           "\n------------------------------------"
-           "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\n ABB:\t%.2f\t\t%.2f"
-           "\n LI:\t%.2f\t\t%.2f",
-           0/(float)0,0,
-           0/(float)0, 0);
-
-    printf("\n\n Costos de Bajas:"
-             "\n------------------------------------"
-           "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\n ABB:\t%.2f\t\t%.2f"
-           "\n LI:\t%.2f\t\t%d",
-           0/(float)0, 0,
-           0/(float)0, 0);
+           "\n Cant. de Evocaciones-Exito:\tRAL: %d \tRS: %d "
+           "\n Cant. de Evocaciones-Fracaso:\tRAL: %d \tRS: %d\n",
+           cant_RAL,
+           evoE_RAL, 0,
+           evoF_RAL, 0);
 
     printf("\n\n Costos de Evocaciones Exitosas:"
              "\n------------------------------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\n ABB:\t%.2f\t\t%d"
-           "\n LI:\t%.2f\t\t%d",
-           (float)0/(float)0, 0,
+           "\n RAL:\t%.2f\t\t%d"
+           "\n RS:\t%.2f\t\t%d",
+           (float)consultas_evoE_RAL/(float)evoE_RAL, max_evoE_RAL,
            (float)0/(float)0, 0);
 
     printf("\n\n Costos de Evocaciones NO Exitosas:"
              "\n------------------------------------"
            "\n\tMEDIOS:\t\tMAXIMOS:"
-           "\n ABB:\t%.2f\t\t%d"
-           "\n LI:\t%.2f\t\t%d \n\n",
-           (float)0/(float)0,0,
+           "\n RAL:\t%.2f\t\t%d"
+           "\n RS:\t%.2f\t\t%d \n\n",
+           (float)consultas_evoF_RAL/(float)evoF_RAL, max_evoF_RAL,
            (float)0/(float)0, 0);
 
     system("pause");

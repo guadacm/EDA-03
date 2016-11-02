@@ -89,12 +89,14 @@ void menu_RAL(int *op)
             fflush(stdin);
             scanf("%s",c);
             strupr(c);
-            temp = evocar_RAL(c,&aux);
-            if (aux==1)
+            temp = evocar_RAL(c, &aux);
+            if (aux == 1)
             {
                 imprimirArt(temp);
+                printf("\n");
             }
-            else printf("\n\t El articulo %s no existe\n\n",c);*/
+            else
+                printf("\n\t El articulo %s no existe\n\n", c);
             system("pause");
             break;
         }
@@ -124,14 +126,15 @@ void menu_RAL(int *op)
 
 int localizar_RAL(char codArt[],int *h, int *pos) // en h guardo el valor que me da la funcion hashing, en pos, la posicion donde debe/deberia estar el elemento que busco
 {
+    consultas_RAL = 0;
     *h = hashing(codArt);
-    printf("\n**** Hash: %d\n", *h);
 
     if(cant_RAL > 0)
     {
         int i = *h;
         *pos = *h;
         int f = 0;
+        consultas_RAL++;
         while(strcmp(RAL[i].codigo, codArt) != 0 && strcmp(RAL[i].codigo, "*") != 0)
         {
             if(strcmp(RAL[i].codigo, "#") == 0 && f == 0)
@@ -140,6 +143,7 @@ int localizar_RAL(char codArt[],int *h, int *pos) // en h guardo el valor que me
                 f = 1;
             }
             i = (i + 1) % M;
+            consultas_RAL++;
         }
         if(strcmp(RAL[i].codigo, codArt) == 0)
             return 1;
@@ -160,7 +164,6 @@ int alta_RAL(Articulo nuevo)
     {
         if(localizar_RAL(nuevo.codigo, &h, &pos) == 0)
         {
-            printf("\n**** Hash: %d\n", h);
             RAL[pos] = nuevo;
             cant_RAL++;
             return 1;
@@ -199,32 +202,31 @@ Articulo evocar_RAL(char codArt[], int *exito)
     int h, pos;
     Articulo aux;
     strcpy(aux.codigo, "*");
-    if(localizar_RAL(codArt, &h, &pos == 1)
+    if(localizar_RAL(codArt, &h, &pos) == 1)
     {
         aux = RAL[pos];
-        /*if(max_evoE_LI < consultadas)
-            max_evoE_LI = consultadas;
+        *exito = 1;
+        evoE_RAL++;
+        consultas_evoE_RAL += consultas_RAL;
 
-        consE_LI += consultadas;
-
-        evoE_LI++;*/
-        return aux;
+        if(consultas_RAL > max_evoE_RAL)
+            max_evoE_RAL = consultas_RAL;
     }
     else
     {
-        /*if(max_evoF_LI < consultadas)
-            max_evoF_LI = consultadas;
+        *exito = 0;
+        evoF_RAL++;
+        consultas_evoF_RAL += consultas_RAL;
 
-        consF_LI += consultadas;
-
-        evoF_LI++;*/
-        return aux;
+        if(consultas_RAL > max_evoF_RAL)
+            max_evoF_RAL = consultas_RAL;
     }
+    return aux;
 }
 
 void mostrar_RAL()
 {
-    int i, j = 1, k = 1;    // j y k son para limitar las celdas que se muestran
+    int i, j = 1;    // j es para limitar las celdas que se muestran
     printf("\n\t----------LISTA DE ARTICULOS----------\n"
            "\n\t     Cantidad de articulos: %d\n", cant_RAL);
     for(i = 0; i < M; i++)
@@ -233,14 +235,14 @@ void mostrar_RAL()
         if(strcmp(RAL[i].codigo, "*") == 0) // Celdaa virgen
         {
             printf("\t * Celda nunca usada\n");
-            k++;
+            j++;
         }
         else
         {
             if(strcmp(RAL[i].codigo, "#") == 0) // Celda libre
             {
                 printf("\t # Celda libre\n");
-                k++;
+                j++;
             }
 
             else        // Celda ocupada
@@ -250,10 +252,11 @@ void mostrar_RAL()
                 j++;    //Limitador de articulos a mostrar
             }
         }
-        if(j % 5 == 0 || k % 10 == 0)
+        if(j % 8 == 0)
         {
             printf("\n");
             system("pause");
+            j = 0;
         }
     }
 }
