@@ -16,13 +16,13 @@ typedef struct Articulo
 
 /* VARIABLES */
 // -- R.A.L
-Articulo RAL[M];    //Definicion del Rebalse Abierto Lineal, de dimensión M.
+Articulo RAL[M];        //Definicion del Rebalse Abierto Lineal, de dimensión M.
 int cant_RAL = 0;       // Cantidad de elementos almacenados
 int evoE_RAL = 0;       // Cantidad de evocaciones exitosas en RAL
 int evoF_RAL = 0;       // Cantidad de evocaciones que fracasan en RAL
 int consultas_evoE_RAL = 0;
 int consultas_evoF_RAL = 0;
-int consultas_RAL = 0;      // Cantidad de baldes consultados en una evocacion
+int consultas_RAL = 0;  // Cantidad de baldes consultados en una evocacion
 int max_evoE_RAL = 0;   // Maximo de baldes consultados en una evocacion exitosa
 int max_evoF_RAL = 0;   // Maximo de baldes consuktadis en una evocacion que fracasa
 int altas_RAL = 0;
@@ -72,7 +72,7 @@ Articulo evocar_RAL(char codArt[], int *exito);
 void mostrar_RAL();
 
 // -- R.S
-int localizar_LVD(pNodo,char [],pNodo*,pNodo*/*,int**/);
+int localizar_LVD(pNodo,char [],pNodo*,pNodo*);
 int localizar_RS(char[], pNodo*, pNodo*,int*,int);
 
 int alta_RS(Articulo);
@@ -193,18 +193,6 @@ void memorizacion_previa(int estr) // estr: 1.RAL || 2.RS
 char confirmacion_baja(Articulo baja)
 {
     char c;
-    /*printf("\n Codigo: \t%s"
-           "\n Articulo: \t%s"
-           "\n Marca: \t%s"
-           "\n Valor: \t$%.2f"
-           "\n Cantidad: \t%i"
-           "\n Club: \t\t%s",
-           baja.codigo,
-           baja.articulo,
-           baja.marca,
-           baja.valor,
-           baja.cantidad,
-           baja.club);*/
     imprimirArt(baja);
     printf("\n\nEsta seguro que quiere eliminar este articulo? S/N: ");
     fflush(stdin);

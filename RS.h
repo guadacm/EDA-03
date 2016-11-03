@@ -102,7 +102,8 @@ void menu_RS(int *op)
             printf("\n\t\t           Rebalse Separado             \n"
                    "\t\t           ----------------             \n");
             printf("\n[4] Mostrar Estructura\n");
-            //if (cant_RS==0) printf("\n\t Estructura VACIA...\n");
+            if (cant_RS==0) printf("\n\t Estructura VACIA...\n");
+            else{
             encabezado();
             printf("Opciones de Mostrar Estructura del RS: \n");
             printf("_________________________\n");
@@ -126,6 +127,7 @@ void menu_RS(int *op)
                 break;
             }
             printf("\n\tTotal de Articulos: %d\n",cant_RS);
+            }
             system("pause");
             break;
         }
@@ -144,28 +146,25 @@ void menu_RS(int *op)
     *op = -1;
 }
 
-int localizar_LVD(pNodo Lista, char codArt[],pNodo *actual, pNodo *anterior/*, int *nodosCons_L*/)
+int localizar_LVD(pNodo Lista, char codArt[],pNodo *actual, pNodo *anterior)
 {
     consultadas_rs=1;  //empieza desde 1, porque estoy consultando una lista, lo que significa que ya consulte la celda de la cabezera de la misma
     (*anterior) = (*actual) = Lista;
     while((*actual)!=NULL && strcmp(codArt,(*actual)->a.codigo)!=0)
     {
         consultadas_rs++;
-        //(*nodosCons_L)++;
         (*anterior)=(*actual);
         (*actual)=(*actual)->sig;
     }
     if((*actual)!=NULL) consultadas_rs++; //significa que no entro al while, porque el codigo era el buscado, cuento la consulta de esa celda
-    //printf("\nconsulta en lista: %d ",*nodosCons_L);
     return (*actual!=NULL);
 }
 
 int localizar_RS(char codArt[], pNodo *actual, pNodo *anterior, int *h,int conCosto)
 {
-    int exito;//,consultaEnLista;
-    //consultaEnLista = 1;
+    int exito;
     *h=hashing(codArt);
-    exito=localizar_LVD(RS[*h],codArt,&(*actual),&(*anterior)/*,&consultaEnLista*/);
+    exito=localizar_LVD(RS[*h],codArt,&(*actual),&(*anterior));
     if (conCosto && exito)
     {
         nodosConsE_rs+=consultadas_rs;
@@ -215,7 +214,6 @@ int baja_RS(char codArt[],int tipo)
             baja_nCorr_rs += 0.5;
             if (baja_MCorr_rs < 0.5) baja_MCorr_rs = 0.5;
             free(actual);
-            //printf("\n Caso de baja 1");
         }
         else
         {
@@ -223,7 +221,6 @@ int baja_RS(char codArt[],int tipo)
             if (baja_MCorr_rs < 0.5) baja_MCorr_rs = 0.5;
             anterior->sig = actual->sig;
             free(actual);
-            //printf("\n Caso de baja 2");
         }
         cant_RS--;
         bajas_rs++;
@@ -231,10 +228,6 @@ int baja_RS(char codArt[],int tipo)
     }
 }
 
-void modificar_RS(char codArt[])
-{
-
-}
 
 void mostrar_RS()
 {
@@ -294,17 +287,13 @@ Articulo evocar_RS(char codArt[],int *exito)
     if(*exito)
     {
         evoE_rs++;
-        //nodosConsE_rs += consultadas_rs;
         if (Max_EvoE_rs < consultadas_rs) Max_EvoE_rs=consultadas_rs;
-        //printf("\nConsultadas_RS, exito: %d",consultadas_rs);
         return actual->a;
     }
     else
     {
         evoF_rs++;
-        //nodosConsF_rs += consultadas_rs;
         if (Max_EvoF_rs < consultadas_rs) Max_EvoF_rs=consultadas_rs;
-        //printf("\nConsultadas_RS, fracaso: %d",consultadas_rs);
         return temp;
     }
 }

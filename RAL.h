@@ -106,7 +106,8 @@ void menu_RAL(int *op)
             printf("\n\t\t        Rebalse Abierto Lineal          \n"
                    "\t\t        ----------------------          \n");
             printf("\n[4] Mostrar Estructura\n");
-            mostrar_RAL();
+            if (cant_RAL==0) printf("\n\t Estructura VACIA...\n");
+            else mostrar_RAL();
             system("pause");
             break;
         }
