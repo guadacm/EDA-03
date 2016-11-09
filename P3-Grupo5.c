@@ -58,6 +58,10 @@ y "Comparacion de Estructuras"
  * Las altas se realizan, insertando el nodo al comienzo de la lista(Ranura) correspondiente, perteneciente al balde que devolvio la funcion de hashing
 
 
+------------------------------------------ CORRECCIONES: ------------------------------------------
+* La opcion "Mostrar articulos" en el Rebalse Abierto lineal muestra todas las celdas aunque la estructura este vacia.
+* En localizar_RAL, en el while pregunto si consulto M celdas, por si la estructura esta llena y no esta el elemento que busco.
+
  */
 #include <stdio.h>
 #include <stdlib.h>

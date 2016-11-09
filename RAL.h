@@ -3,6 +3,7 @@
 
 char c[8];
 Articulo temp;
+int contador; // Cuenta la cantidad de
 
 void menu_RAL(int *op)
 {
@@ -106,8 +107,9 @@ void menu_RAL(int *op)
             printf("\n\t\t        Rebalse Abierto Lineal          \n"
                    "\t\t        ----------------------          \n");
             printf("\n[4] Mostrar Estructura\n");
-            if (cant_RAL==0) printf("\n\t Estructura VACIA...\n");
-            else mostrar_RAL();
+            //if (cant_RAL==0) printf("\n\t Estructura VACIA...\n");    // CORRECCION
+            //else
+                mostrar_RAL();
             system("pause");
             break;
         }
@@ -135,7 +137,7 @@ int localizar_RAL(char codArt[],int *h, int *pos) // en h guardo el valor que me
         int i = *h;
         int f = 0; // si esta en 1 me dice que ya guardo en pos una celda libre
         consultas_RAL++;
-        while(strcmp(RAL[i].codigo, codArt) != 0 && strcmp(RAL[i].codigo, "*") != 0)
+        while(strcmp(RAL[i].codigo, codArt) != 0 && strcmp(RAL[i].codigo, "*") != 0 && consultas_RAL < M)       // CORRECCION
         {
             if(strcmp(RAL[i].codigo, "#") == 0 && f == 0)
             {
@@ -145,6 +147,8 @@ int localizar_RAL(char codArt[],int *h, int *pos) // en h guardo el valor que me
             i = (i + 1) % M;
             consultas_RAL++;
         }
+        if(consultas_RAL == M-1)    //CORRECCION
+            return 0;
         if(strcmp(RAL[i].codigo, "*") == 0 && f == 0)
             *pos = i;
         if(strcmp(RAL[i].codigo, codArt) == 0)

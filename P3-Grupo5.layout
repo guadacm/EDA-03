@@ -2,39 +2,38 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="Estructuras.h" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="RS.h" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6754" topLine="141" />
+			<Cursor1 position="5909" topLine="0" />
 		</Cursor>
 		<Folding>
-			<Collapse line="98" />
-			<Collapse line="158" />
-			<Collapse line="193" />
-			<Collapse line="221" />
+			<Collapse line="9" />
 		</Folding>
 	</File>
 	<File name="RAL.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5139" topLine="48" />
+			<Cursor1 position="3846" topLine="0" />
 		</Cursor>
 		<Folding>
-			<Collapse line="34" />
-			<Collapse line="65" />
-			<Collapse line="80" />
-			<Collapse line="103" />
+			<Collapse line="7" />
 		</Folding>
-	</File>
-	<File name="RS.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5749" topLine="150" />
-		</Cursor>
 	</File>
 	<File name="P3-Grupo5.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1184" topLine="92" />
+			<Cursor1 position="2" topLine="62" />
 		</Cursor>
 		<Folding>
-			<Collapse line="24" />
+			<Collapse line="71" />
+			<Collapse line="80" />
+		</Folding>
+	</File>
+	<File name="Estructuras.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5003" topLine="61" />
+		</Cursor>
+		<Folding>
+			<Collapse line="7" />
+			<Collapse line="33" />
 		</Folding>
 	</File>
 </CodeBlocks_layout_file>
